@@ -1,0 +1,13 @@
+{
+  "name": "jsolver",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "express": "^5.1.0",
+    "patchright-browserpool-cluster": "https://github.com/israelsgalaxy/patchright-browserpool-cluster.git",
+    "yargs": "^18.0.0"
+  }
+}
