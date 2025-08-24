@@ -25,7 +25,7 @@ const argv = yargs(hideBin(process.argv))
     })
     .option("browser_type", {
         alias: "b",
-        choices: ["chrome"],
+        choices: ["chrome", "chromium"],
         describe: "Browser type to use",
         default: "chrome",
     })
@@ -101,7 +101,15 @@ const cluster = await Cluster.launch({
     workerCreationDelay: argv.worker_creation_delay,
     launchOptions: {
         channel: argv.browser_type,
-        headless: argv.headless
+        headless: argv.headless,
+        args: [
+            "--disable-dev-shm-usage",
+            "--no-sandbox",
+            '--disable-domain-reliability',
+            "--disable-setuid-sandbox",
+            '--disable-gpu',
+            "--disable-features=IsolateOrigins,site-per-process"
+        ]
     },
     contextOptions: {
         proxyGenerator: () => {
