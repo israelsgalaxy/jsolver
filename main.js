@@ -77,7 +77,7 @@ const argv = yargs(hideBin(process.argv))
         describe: "Length of proxy session ID",
         default: 8,
     })
-    .strict()
+    // .strict()
     .help()
     .parse();
 
