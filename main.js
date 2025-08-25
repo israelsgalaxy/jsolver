@@ -103,12 +103,72 @@ const cluster = await Cluster.launch({
         channel: argv.browser_type,
         headless: argv.headless,
         args: [
-            "--disable-dev-shm-usage",
             "--no-sandbox",
-            '--disable-domain-reliability',
+            "--disable-dev-shm-usage",
             "--disable-setuid-sandbox",
-            '--disable-gpu',
-            "--disable-features=IsolateOrigins,site-per-process"
+            "--disable-software-rasterizer",
+
+            "--disable-blink-features=AutomationControlled",  // avoid navigator.webdriver detection
+            "--disable-background-networking",
+            "--disable-background-timer-throttling",
+            "--disable-backgrounding-occluded-windows",
+            "--disable-renderer-backgrounding",
+            '--disable-application-cache',
+            '--disable-field-trial-config',
+            '--export-tagged-pdf',
+            '--force-color-profile=srgb',
+            '--safebrowsing-disable-download-protection',
+            '--disable-search-engine-choice-screen',
+            '--disable-browser-side-navigation',
+            '--disable-save-password-bubble',
+            '--disable-single-click-autofill',
+            '--allow-file-access-from-files',
+            '--disable-prompt-on-repost',
+            '--dns-prefetch-disable',
+            '--disable-translate',
+            '--disable-client-side-phishing-detection',
+            '--disable-oopr-debug-crash-dump',
+            '--disable-top-sites',
+            '--ash-no-nudges',
+            '--no-crash-upload',
+            '--deny-permission-prompts',
+            '--simulate-outdated-no-au="Tue, 31 Dec 2099 23:59:59 GMT"',
+            '--disable-ipc-flooding-protection',
+            '--disable-password-generation',
+            '--disable-domain-reliability',
+            '--disable-breakpad',
+            // Allow Manifest V2 extensions
+            // --disable-features=ExtensionManifestV2DeprecationWarning,ExtensionManifestV2Disabled,ExtensionManifestV2Unsupported
+            '--disable-features=OptimizationHints,OptimizationHintsFetching,Translate,OptimizationTargetPrediction,OptimizationGuideModelDownloading,DownloadBubble,DownloadBubbleV2,InsecureDownloadWarnings,InterestFeedContentSuggestions,PrivacySandboxSettings4,SidePanelPinning,UserAgentClientHint',
+            '--no-pings',
+            // '--homepage=chrome://version/',
+            '--animation-duration-scale=0',
+            '--wm-window-animations-disabled',
+            '--enable-privacy-sandbox-ads-apis',
+            // '--disable-popup-blocking',
+            '--lang=en-US',
+            '--no-default-browser-check',
+            '--no-first-run',
+            '--no-service-autorun',
+            '--password-store=basic',
+            '--log-level=3',
+            '--proxy-bypass-list=<-loopback>;localhost;127.0.0.1;*.local',
+
+            // Not needed, here just for reference
+            // Network/Connection Tuning
+            '--enable-features=NetworkService,ParallelDownloading',
+            '--max-connections=255',  // Total active connections
+            '--max-parallel-downloads=50',  // Concurrent downloads
+            '--socket-reuse-policy=2',  // Aggressive socket reuse
+
+            // Thread/Process Management
+            // '--renderer-process-limit=0',  // Unlimited renderers
+            // '--in-process-gpu',  // Reduce process count // NO
+            // '--disable-site-isolation-trials',  // Prevent tab grouping // NO
+
+            // Protocol-Specific
+            // '--http2-no-coalesce-host',  // Bypass HTTP/2 coalescing
+            // '--force-http2-hpack-huffman=off',  // Reduce HPACK overhead
         ]
     },
     contextOptions: {
